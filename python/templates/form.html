@@ -8,7 +8,8 @@
       var id = document.getElementById(elem.parentNode.id)
       console.log(id.innerText)
       list_of_favourites.push(id.innerText)
-      localStorage.setItem("listOfFavs", list_of_favourites) 
+      localStorage.setItem("listOfFavs", list_of_favourites)
+      localInfo()
     }
 
     function localInfo() {
