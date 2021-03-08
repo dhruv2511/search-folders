@@ -2,9 +2,24 @@
   <head>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/form.css')}}" /> 
   </head>
-  <body>
-    <div class="row">
-      <div class="column">
+  <script>
+    const list_of_favourites = []
+    function addToFav(elem){
+      var id = document.getElementById(elem.parentNode.id)
+      console.log(id.innerText)
+      list_of_favourites.push(id.innerText)
+      localStorage.setItem("listOfFavs", list_of_favourites) 
+    }
+
+    function localInfo() {
+      var fav = document.getElementById("favourite")
+      fav.innerText = localStorage.getItem("listOfFavs")
+      
+    }
+  </script>
+  <body onload="localInfo()">
+    <div class="column">
+      <div class="row">
         <form action="" method="get">
           <input type="text" name="fileName">
           <input type="submit" value="Search">
@@ -13,14 +28,20 @@
       <div class="column">
         <p>List of Files</p>
         <p>
-          {% for row in data %}
-            <ul>
-              {{row}}
+          {% for file in data %}
+            <ul id="{{file}}">
+              {{file}}   <input type="button" onclick=addToFav(this) value="Add to Favourite"/>
             </ul>
           {% endfor %}
         </p>
       </div>
-      <div class="column"></div>
+      <div class="row">
+        <p>
+          <p>List of Favourites</p>
+          <ul id="favourite">
+          </ul>
+        </p>
+      </div>
     </div>
   </body>
 </html>

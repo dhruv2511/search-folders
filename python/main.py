@@ -4,8 +4,11 @@ from flask import request
 from flask import render_template
 import os
 
+from flask.globals import session
+
 app = Flask(__name__)
 dirName = '../files'
+
 @app.route("/")
 def index():
     fileName = request.args.get("fileName", "")
@@ -30,7 +33,6 @@ def search_box(search_id):
       returned_list += [fileName]
 
   return returned_list
-
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)
